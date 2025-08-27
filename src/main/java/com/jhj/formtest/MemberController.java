@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +23,12 @@ public class MemberController {
 	public String login2() {
 		
 		return "login2";
+	}
+	
+	@RequestMapping(value = "/join")
+	public String join() {
+		
+		return "join";
 	}
 	
 	@RequestMapping(value = "/loginOk")
@@ -56,5 +63,28 @@ public class MemberController {
 		} else { // 로그인 실패
 			return "loginFail";
 		}
+	}
+	
+	@RequestMapping(value = "/boardlist/{bnum}")
+	public String boardlist(@PathVariable String bnum, Model model) { // 파라미터 이름없이 전달된 값 받아오기
+		model.addAttribute("bnum", bnum);
+		
+		return "boardlist";
+	}
+	
+	@RequestMapping(value = "/joinOk")
+	//public String joinOk(HttpServletRequest request, Model model) {
+	public String joinOk(MemberDto memberDto, Model model) {
+	// MemberDto의 멤버 변수와 form의 파라미터 이름이 반드시 일치
+		
+		//String mid = request.getParameter("mid");
+		//String mpw = request.getParameter("mpw");
+		//String mname = request.getParameter("mname");
+		//String mage = request.getParameter("mage");
+		
+		//MemberDto memberDto = new MemberDto(mid, mpw, mname, mage);
+		model.addAttribute("memberDto", memberDto);
+		
+		return "joinOk";
 	}
 }
