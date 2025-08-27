@@ -23,7 +23,8 @@ public class RedirectController {
 	public String studentCheck(@RequestParam("sid") String sid, Model model,HttpServletResponse response) {
 		
 		if(sid.endsWith("tiger")) { // 아이디가 tiger이면 학생으로 간주
-			return "redirect:studentGood";
+			return "redirect:studentGood"; 
+		// redirect: -> 다시 studentGood으로 요청, studentGood.jsp로 가는게 아님
 			//return "studentGood";
 		} else {
 			return "redirect:studentNg";
